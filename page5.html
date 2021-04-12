@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CSS Property Basic</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>                  
+    <style>
+        .css_test {
+            background-image : url("https://superkts.com/img/css/bg0697.jpg");
+            border : 1px solid black;
+            display : inline-block;
+            font-weight : bold;
+            height : 400px;
+            line-height : 150px !important;
+            overflow : auto;
+            text-align : center;
+            width : 30%;
+        }
+    
+        .css_test span {
+            background : #fff;
+            border-radius : 5px;
+            padding : 15px;
+        }
+
+        h1 {
+            text-align: center;
+            padding-top: 200px;
+            padding-bottom: 50px;
+        }
+    </style>
+  </head>
+<body>
+    <h1>각각의 스크롤바를 움직여 보세요. 그리고 화면도 스크롤해 보세요.</h1>
+    <center>
+        <div class="css_test" style="background-attachment:scroll;">
+            <span>scroll</span><br>
+            <span>웹 프로그래밍</span><br>
+            <span>scroll</span><br>
+            <span>웹 프로그래밍</span><br>
+            <span>scroll</span><br>
+        </div>
+        <div class="css_test" style="background-attachment:fixed;">
+            <span>fixed</span><br>
+            <span>웹 프로그래밍</span><br>
+            <span>fixed</span><br>
+            <span>웹 프로그래밍</span><br>
+            <span>fixed</span><br>
+        </div>
+        <div class="css_test" style="background-attachment:local;">
+            <span>local</span><br>
+            <span>웹 프로그래밍</span><br>
+            <span>local</span><br>
+            <span>웹 프로그래밍</span><br>
+            <span>local</span><br>
+        </div>
+    </center>
+    <pre>
+        &lt;!DOCTYPE html&gt;
+        &lt;html&gt;
+            &lt;head&gt;
+                &lt;title&gt;CSS Property Basic&lt;/title&gt;
+                &lt;style&gt;
+                    .css_test {
+                        background-image : url("https://superkts.com/img/css/bg0697.jpg");
+                        border : 1px solid black;
+                        display : inline-block;
+                        font-weight : bold;
+                        height : 400px;
+                        line-height : 150px !important;
+                        overflow : auto;
+                        text-align : center;
+                        width : 30%;
+                    }
+                
+                    .css_test span {
+                        background : #fff;
+                        border-radius : 5px;
+                        padding : 15px;
+                    }
+
+                    h1 {
+                        padding-top: 100px;
+                        padding-bottom: 50px;
+                    }
+                &lt;/style&gt;
+            &lt;/head&gt;
+            &lt;body&gt;
+                &lt;h1&gt;각각의 스크롤바를 움직여 보세요. 그리고 화면도 스크롤해 보세요.&lt;/h1&gt;
+                &lt;center&gt;
+                    &lt;div class="css_test" style="background-attachment:scroll;"&gt;
+                        &lt;span&gt;scroll&lt;/span&gt;&lt;br&gt;
+                        &lt;span&gt;웹 프로그래밍&lt;/span&gt;&lt;br&gt;
+                        &lt;span&gt;scroll&lt;/span&gt;&lt;br&gt;
+                        &lt;span&gt;웹 프로그래밍&lt;/span&gt;&lt;br&gt;
+                        &lt;span&gt;scroll&lt;/span&gt;&lt;br&gt;
+                    &lt;/div&gt;
+                    &lt;div class="css_test" style="background-attachment:fixed;"&gt;
+                        &lt;span&gt;fixed&lt;/span&gt;&lt;br&gt;
+                        &lt;span&gt;웹 프로그래밍&lt;/span&gt;&lt;br&gt;
+                        &lt;span&gt;fixed&lt;/span&gt;&lt;br&gt;
+                        &lt;span&gt;웹 프로그래밍&lt;/span&gt;&lt;br&gt;
+                        &lt;span&gt;fixed&lt;/span&gt;&lt;br&gt;
+                    &lt;/div&gt;
+                    &lt;div class="css_test" style="background-attachment:local;"&gt;
+                        &lt;span&gt;local&lt;/span&gt;&lt;br&gt;
+                        &lt;span&gt;웹 프로그래밍&lt;/span&gt;&lt;br&gt;
+                        &lt;span&gt;local&lt;/span&gt;&lt;br&gt;
+                        &lt;span&gt;웹 프로그래밍&lt;/span&gt;&lt;br&gt;
+                        &lt;span&gt;local&lt;/span&gt;&lt;br&gt;
+                    &lt;/div&gt;
+                &lt;/center&gt;
+            &lt;/body&gt;
+        &lt;/html&gt;
+
+    </pre>
+</body>
+</html>
