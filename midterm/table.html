@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="kr">
+    <head>
+        <meta charset="UTF-8">
+        <style>
+          div{ top: 30px; height: 200px; width: 640px; overflow: scroll; border-style: solid; position: relative;}
+
+          thead { position: fixed; /* (1) 스크롤을 올려도 제목행이 현 위치에 계속 고정되도록 설정하는 속성과 속성값을 추가하시오 */ 
+            z-index: 100; /* (2) 스크롤을 올려도 제목행이 다른 행에 가려지지 않게 설정하는 속성과 속성값을 추가하시오 */ }
+
+          th { background-color: gray; color: white; }
+
+          tbody > tr:nth-child(odd) { /* (3) 제목행을 제외하고, 일반행에서 홀수행에 있는 셀의 배경색을 오렌지색으로, 글자색은 흰색으로 설정하기 위한 적절한 선택자를 입력하시오 */
+              background-color: orange; color: white;}
+
+          /* (4) 일반행을 위치 설정 하시오 */ 
+          tbody { 
+            position: absolute; 
+            top: 60px; 
+            }
+
+          th, td { width: 100px; height: 50px;
+            text-align: center; /* (5) 글자 위치를 가운데로 설정하기 위한 속성 및 속성값을 추가하시오 */ }
+
+          td:first-child { font-weight: bold; }
+
+          td:nth-child(n+2){ font-weight:lighter; }
+
+          /* (6) 테이블 행 마우스 가져다 두면 배경은 노란색으로, 글자 색은 검은색으로, 글자는 진하게 변경하고자 하도록 CSS 코드 입력*/
+          td:hover { 
+            background-color: yellow; color: black; font-weight: bold;
+            }
+
+          
+        </style>
+        <title>수업 시간표</title>
+    </head>
+    <body>
+      <div>
+        <table border="1">
+          <thead>
+            <tr>
+              <th></th> <th>월</th> <th>화</th> <th>수</th> <th>목</th> <th>금</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1교시</td> <td>국어</td> <td>컴퓨터</td> <td>국어</td> <td>국어</td> <td>바생</td>
+            </tr>
+            <tr>
+              <td>2교시</td> <td>국어</td> <td>한자</td> <td>국어</td> <td>창의</td> <td>수학</td>
+            </tr>
+            <tr>
+              <td>3교시</td> <td colspan="5" >점심</td> <!--(7) '점심'이라는 글이 있는 셀의 크기를 5칸으로 설정-->
+            </tr>
+            <tr>
+              <td>4교시</td> <td>영어</td> <td>바생</td> <td>영어</td> <td>바생</td> <td>과학</td>
+            </tr>
+          </tbody>
+          </table>
+      </div>   
+    </body>
+</html>
