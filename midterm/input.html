@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<style>
+  input, div, select { border-radius: 5px; /* (1) 5px 반지름의 둥근 테두리 생성을 위한 속성 & 속성값 추가*/}
+
+  div { width: 400px; background-color: gainsboro; padding: 20px; }
+
+  .submit, .text, select, .gender{ display: block; margin: 8px 0; padding: 12px 20px;
+    border: 1px solid black; /* (2) 두께 1px인 검정색 테두리 선 생성을 위한 속성 & 속성값 추가 */}
+
+  .gender{background-color: white;}
+
+  .text, .gender { width: 300px;}
+
+  select, input[type=submit] /* (3) submit 버튼에도 스타일을 동일하게 적용되도록 선택자 추가. 단 클래스 선택자(예: .submit) 사용불가 */ {
+    width: 342px; /* (4) 이름, 학번 입력창과 가로 길이가 같도록 width 수정 */ }
+
+  .submit {background-color: green; /* (5) 영문 색상 대신 RGB로 초록색을 설정*/ color: white;border: none;}
+
+</style>
+<body>
+<div>
+  <form action="/action_page.php" method="POST"> <!-- (6) Submit 버튼 클릭 시 POST 형식으로 /action_page.php로 입력값을 전달하도록 속성 & 속성값을 추가 -->
+    <label for="name">이름</label>
+    <input class="text" type="text" id="name" name="name">
+
+    <label for="sid">학번</label>
+    <input class="text" type="text" id="sid" name="sid">
+
+    <label>성별</label>
+    <div class="gender"> <!-- (7) type & name 속성의 속성값을 수정하여 라디오 버튼 형식(예: 한 옵션 선택 시 다른 옵션은 자동 취소)으로 수정 -->
+      <input for="man" type="radio" name="gender" value="man">
+      <label for="man">남자</label>
+      <input for="woman" type="radio" name="gender" value="woman">
+      <label for="woman">여자</label>
+    </div>
+    
+
+    <label for="major">전공</label>
+    <select id="major" name="major"> <!-- (8) 오른쪽 그림 처럼 메뉴 옵션을 넣고자 함. 적절한 태그 및 속성, 속성값 추가 -->
+      <optgroup label="IT대학"> 
+        <option value="컴퓨터공학과">컴퓨터공학과</option>
+        <option value="전기전자공학과">전기전자공학과</option>
+      </optgroup>
+      <optgroup label="자연과학대학">
+        <option value="물리학과">물리학과</option>
+        <option value="생명공학과">생명공학과</option>
+      </optgroup>
+    </select>
+
+    <input class = "submit" type="submit" value="Submit">
+  </form>
+</div>
+
+</body>
+</html>
