@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>한국 일별 박스오피스</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      max-width: 960px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #212529;
+      margin-bottom: 20px;
+    }
+
+    #warning {
+      background-color: #fff3cd;
+      color: #856404;
+      border: 1px solid #ffeeba;
+      padding: 10px 15px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      font-size: 0.95rem;
+    }
+
+    .controls {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    .controls button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      font-size: 0.9rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .controls button:hover {
+      background-color: #0056b3;
+    }
+
+    .controls span, .controls label {
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    th, td {
+      border: 1px solid #dee2e6;
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #e9ecef;
+    }
+
+    .rankInten {
+      color: #dc3545;
+    }
+
+    #search-controls, #filter-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    input[type="text"] {
+      padding: 6px;
+      font-size: 1rem;
+    }
+  </style>
+  <script>
+    const apiKey = '90193446a5f6020c4e3720a2d1376e1c';
+    const apiURL = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json";
+
+    const formatDate = d => d.getFullYear() + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0');
+    const rankSymbol = n => n > 0 ? '▲' + n : n < 0 ? '▼' + -n : '-';
+    const getXday = (d, move) => new Date(d.setDate(d.getDate() + move));
+    const onlyKoreanMovies = () => $('input:radio[name=movieType]:checked').val();
+
+    let curDate = getXday(new Date(), -1);
+
+    const updateBoxOffice = () => {
+      const dateStr = formatDate(curDate);
+      $('#curData').text(dateStr);
+      $('#container').html('<h1>로딩 중...</h1>');
+      $.get(`${apiURL}?key=${apiKey}&targetDt=${dateStr}${onlyKoreanMovies()}`, res => {
+        const table = $('<table>').attr('id','movies').append($('<tr>').append('<th colspan=2>랭킹</th><th>제목</th><th>개봉일</th><th>누적 관객수</th>'));
+        res.boxOfficeResult.dailyBoxOfficeList.forEach(item => {
+          table.append(
+            $('<tr>').append(
+              `<td>${item.rank}</td>`,
+              `<td class="rankInten">${rankSymbol(+item.rankInten)}</td>`,
+              `<td class="movieNm">${item.movieNm}</td>`,
+              `<td>${item.openDt}</td>`,
+              `<td>${item.audiAcc}</td>`
+            )
+          );
+        });
+        $('#container').html(table);
+      });
+    };
+
+    $(function () {
+      updateBoxOffice();
+
+      $('#left-button').click(() => {
+        curDate = getXday(curDate, -1);
+        updateBoxOffice();
+      });
+
+      $('#right-button').click(() => {
+        const tomorrow = new Date(curDate);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        if (tomorrow < getXday(new Date(), -1)) {
+          curDate = tomorrow;
+          updateBoxOffice();
+        } else {
+          alert($('#warning').text());
+        }
+      });
+
+      $('#today-button').text('최신 박스오피스 보기').click(() => {
+        curDate = getXday(new Date(), -1);
+        updateBoxOffice();
+      });
+
+      $('#warning').text('※ 일별 박스오피스는 하루 전날(' + formatDate(curDate) + ')까지 조회할 수 있습니다.');
+
+      $('#curData').click(()=>{updateBoxOffice();});
+
+      $('#search-button').click(() => {
+        const searchText = $('#searchText').val();   
+        if(searchText.length != 0){
+            $('#movies tr:nth-child(n+2) td.movieNm').each((index, element)=>{
+                if($(element).text().includes(searchText))
+                    $(element).parent().show();
+                else
+                    $(element).parent().hide();
+            });
+        } else {
+            $('#movies tr:nth-child(n+2)').show();
+        }
+      });
+    });
+  </script>
+</head>
+<body>
+  <h1>한국 일별 박스오피스</h1>
+  <p id="warning"></p>
+  <div class="controls">
+    <div>
+      <button id="left-button">← 하루 전</button>
+      <button id="curData"></button>
+      <button id="right-button">다음 날 →</button>
+      <button id="today-button"></button>
+    </div>
+    <div id="filter-controls">
+      <label><input type="radio" name="movieType" value="&repNationCd=K"> 한국영화</label>
+      <label><input type="radio" name="movieType" value="&repNationCd=F"> 외국영화</label>
+      <label><input type="radio" name="movieType" value="" checked> 전체</label>
+    </div>
+    <div id="search-controls">
+      <label>영화 검색:</label> 
+      <input type="text" id="searchText"> 
+      <button id="search-button">검색</button>
+    </div>
+  </div>
+  <div id="container"></div>
+</body>
+</html>
